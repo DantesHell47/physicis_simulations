@@ -24,14 +24,16 @@ function projectile_simulation(angle, initial_velocity, air_resistance)
     return position_x, position_y
 end
 
-angle = π/2
+angle = π/4
 initial_velocity = 30.
 air_resistance = 0.05
 
+
+plot()
 x, y = projectile_simulation(angle, initial_velocity, air_resistance)
 for i =1:length(x)
     graf1 = plot!([x[i]] , [y[i]], xlabel="Posição x (m)",
-        markershape=:circle,
+        markershape=:circle,c=:gray,
         ylabel="Posição y (m)", 
         title="Trajetória do Projétil",
         ylim=(0,50),
@@ -42,6 +44,11 @@ for i =1:length(x)
         sleep(0.09)
 end
 
+#########################
+vy(x) = 30 * sind(π/4) - 9.81 * x * 0.01
+dvy(x) = ((vy + 1e-8) - vy(x)) / 1e-8
+
+#########################
 # Criar o gráfico com vetores
 
 for i in 1:length(x)
@@ -51,3 +58,6 @@ for i in 1:length(x)
     display(graf3)
     sleep(0.1)
 end
+
+
+
